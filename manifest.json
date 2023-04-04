@@ -1,0 +1,28 @@
+{
+    "action": {
+        "default_title": "Tools for ChatGPT"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "jquery-3.6.4.slim.min.js",
+                "tools.js",
+                "main.js"
+            ],
+            "matches": [ "https://chat.openai.com/chat" ],
+            "run_at": "document_end"
+        }
+    ],
+    "host_permissions": [
+        "https://chat.openai.com/chat"
+    ],
+    "manifest_version": 3,
+    "name": "Tools for ChatGPT",
+    "permissions": [
+        "scripting"
+    ],
+    "version": "1.0"
+}
