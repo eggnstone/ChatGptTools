@@ -15,6 +15,10 @@
             "run_at": "document_end"
         }
     ],
+    "description": "Tools to make working with ChatGPT easier, e.g. copying text to the clipboard.",
+    "icons": {
+        "128": "images/logo128.png"
+    },
     "manifest_version": 3,
     "name": "Tools for ChatGPT",
     "permissions": [
