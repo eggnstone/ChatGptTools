@@ -1,5 +1,4 @@
 // noinspection JSUnresolvedVariable
-
 jQuery.noConflict();
 
 (function($)
@@ -24,10 +23,7 @@ jQuery.noConflict();
                     if (item.tagName === "DIV")
                         item = item.children[0];
 
-                    log("middleColumn.innerText: " + middleColumn.innerText);
-                    log("middleColumn.innerHTML: " + middleColumn.innerHTML);
                     const text = middleColumn.innerText;
-
                     const button = document.createElement('button');
                     button.innerHTML = createCopyToClipboardElement();
                     button.onclick = () => copyToClipboard(text);
