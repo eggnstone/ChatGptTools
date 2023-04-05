@@ -1,0 +1,6 @@
+Tools to make working with ChatGPT easier.
+
+Features:
+- copy text to clipboard
+
+More features coming soon.

@@ -1,3 +1,0 @@
-importScripts('tools.js')
-
-// TODO
