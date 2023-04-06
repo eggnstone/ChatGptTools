@@ -29,8 +29,8 @@ function copyToClipboard(s)
 {
     navigator.clipboard.writeText(s).then(() =>
         {
-            //log("Copied to clipboard: " + s);
-            log("Copied text to clipboard.");
+            log("Copied to clipboard:\n\n" + s);
+            //log("Copied text to clipboard.");
         },
         () =>
         {
