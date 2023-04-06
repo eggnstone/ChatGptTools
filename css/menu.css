@@ -19,6 +19,7 @@ menu#chatgpt-tools-context-menu menu
     padding: 4px 20px 4px 24px;
     font-family: "Segoe UI", sans-serif;
     font-size: small;
+    white-space: nowrap;
 }
 
 menu#chatgpt-tools-context-menu menu:hover
