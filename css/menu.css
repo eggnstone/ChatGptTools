@@ -1,0 +1,28 @@
+menu#chatgpt-tools-context-menu
+{
+    display: none;
+    background-color: white;
+    border: 1px solid #DADCE0;
+    box-shadow: 4px 4px 4px -3px #8E8E8E;
+    left: 10px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    z-index: 100;
+}
+
+menu#chatgpt-tools-context-menu menu
+{
+    position: relative;
+    margin: 0;
+    padding: 4px 20px 4px 24px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: small;
+}
+
+menu#chatgpt-tools-context-menu menu:hover
+{
+    background-color: #E8E8E9;
+    cursor: default;
+}
