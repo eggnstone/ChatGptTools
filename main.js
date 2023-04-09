@@ -22,10 +22,15 @@ jQuery.noConflict();
 
                     const text = getTextFromGroup(group);
                     const buttonsDiv = getButtonsDivFromGroup(group);
+                    console.log("button #" + groupIndex + ": text: " + text);
 
                     const button = document.createElement('button');
                     button.innerHTML = createCopyToClipboardElement();
-                    button.onclick = () => copyToClipboard(text);
+                    button.onclick = () =>
+                    {
+                        console.log("button.onclick: text: " + text);
+                        copyToClipboard(text);
+                    }
                     buttonsDiv.prepend(button);
                 }
             }
@@ -77,6 +82,8 @@ jQuery.noConflict();
                 onCopyAllTexts(e.target);
             else if (e.target.id === "CopyAllTextsAndAuthors")
                 onCopyAllTextsAndAuthors(e.target);
+            else
+                console.log("click event: Nothing to do.")
         });
 
         document.addEventListener("contextmenu", function(e)

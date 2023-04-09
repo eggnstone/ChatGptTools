@@ -16,14 +16,13 @@
         }
     ],
     "description": "Tools to make working with ChatGPT easier, e.g. copying text to the clipboard.",
+    "host_permissions": [],
     "icons": {
         "128": "images/logo128.png"
     },
     "manifest_version": 3,
     "name": "Tools for ChatGPT",
-    "permissions": [
-        "scripting"
-    ],
+    "permissions": [],
     "version": "1.0.2",
     "web_accessible_resources": [
         {
@@ -31,7 +30,9 @@
                 "css/menu.css",
                 "images/copy.svg"
             ],
-            "matches": [ "https://chat.openai.com/*" ]
+            "matches": [
+                "https://chat.openai.com/*"
+            ]
         }
     ]
 }
