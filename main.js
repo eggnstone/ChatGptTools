@@ -19,18 +19,9 @@ jQuery.noConflict();
                 {
                     const group = groups[groupIndex];
                     group.className += " chatgpt-tools";
-
-                    const text = getTextFromGroup(group);
-                    const buttonsDiv = getButtonsDivFromGroup(group);
-                    console.log("button #" + groupIndex + ": text: " + text);
-
                     const button = document.createElement('button');
                     button.innerHTML = createCopyToClipboardElement();
-                    button.onclick = () =>
-                    {
-                        console.log("button.onclick: text: " + text);
-                        copyToClipboard(text);
-                    }
+                    const buttonsDiv = getButtonsDivFromGroup(group);
                     buttonsDiv.prepend(button);
                 }
             }
@@ -74,16 +65,26 @@ jQuery.noConflict();
             const menu = document.getElementById("chatgpt-tools-context-menu");
             menu.style.display = "none";
 
-            if (e.target.id === "CopyText")
-                onCopyText(e.target);
-            else if (e.target.id === "CopyTextAndAuthor")
-                onCopyTextAndAuthor(e.target);
-            else if (e.target.id === "CopyAllTexts")
-                onCopyAllTexts(e.target);
-            else if (e.target.id === "CopyAllTextsAndAuthors")
-                onCopyAllTextsAndAuthors(e.target);
+            let target = e.target;
+            if (target.id === "CopyText")
+                onCopyTextViaTarget(menuTarget);
+            else if (target.id === "CopyTextAndAuthor")
+                onCopyTextAndAuthorViaTarget(menuTarget);
+            else if (target.id === "CopyAllTexts")
+                onCopyAllTexts();
+            else if (target.id === "CopyAllTextsAndAuthors")
+                onCopyAllTextsAndAuthors();
             else
-                console.log("click event: Nothing to do.")
+            {
+                if (target.tagName.toLowerCase() === "path")
+                    target = target.parentElement;
+
+                if (target.tagName.toLowerCase() === "svg")
+                    target = target.parentElement;
+
+                if (target.tagName.toLowerCase() === "button" && target.className.startsWith("chatgpt-tools "))
+                    onCopyTextViaTarget(target);
+            }
         });
 
         document.addEventListener("contextmenu", function(e)
@@ -122,21 +123,32 @@ jQuery.noConflict();
         }, false);
     }
 
-    function onCopyText()
+    function onCopyTextViaTarget(target)
     {
-        const group = getGroupFromMenuTarget(menuTarget);
+        const group = getGroupFromTarget(target);
         if (!group)
+        {
+            console.log("Could not get group from target.")
             return;
+        }
 
+        onCopyTextFromGroup(group);
+    }
+
+    function onCopyTextFromGroup(group)
+    {
         const text = getTextFromGroup(group);
         copyToClipboard(text);
     }
 
-    function onCopyTextAndAuthor()
+    function onCopyTextAndAuthorViaTarget(target)
     {
-        const group = getGroupFromMenuTarget(menuTarget);
+        const group = getGroupFromTarget(target);
         if (!group)
+        {
+            console.log("Could not get group from target.")
             return;
+        }
 
         const author = getAuthorFromGroup(group);
         const text = getTextFromGroup(group);
@@ -172,9 +184,8 @@ jQuery.noConflict();
         copyToClipboard(allTexts);
     }
 
-    function getGroupFromMenuTarget(menuTarget)
+    function getGroupFromTarget(target)
     {
-        let target = menuTarget;
         while (target)
         {
             if (target.tagName.toLowerCase() === "div" && target.className && target.className.startsWith("group "))
